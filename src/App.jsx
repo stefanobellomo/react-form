@@ -20,9 +20,15 @@ function App() {
 
   function handleSubmit(e) {
     e.preventDefault();
-    const addNewArticle = [...articles, newArticle]
-    setArticles(addNewArticle)
-    setNewArticle('')
+
+    if (newArticle.length < 4) {
+      setNewArticle('')
+    } else {
+      const addNewArticle = [...articles, newArticle]
+      setArticles(addNewArticle)
+      setNewArticle()
+    }
+
   }
 
   return (
@@ -35,6 +41,7 @@ function App() {
 
             <form onSubmit={handleSubmit}>
               <input type="text" value={newArticle} onChange={(e) => setNewArticle(e.target.value)} />
+
               <button className="badge bg-success my-4 mx-4" type="submit">Add</button>
             </form>
 
@@ -43,7 +50,7 @@ function App() {
                 <li key={article.id}
                   className="list-group-item d-flex justify-content-between align-items-center">
                   {article.title}
-                  <span clasName="badge bg-secondary badge-pill"></span>
+                  <span className="badge bg-secondary badge-pill"></span>
                 </li>
               ))}
 
