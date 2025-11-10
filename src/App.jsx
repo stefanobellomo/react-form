@@ -1,3 +1,4 @@
+import { useState } from "react"
 
 function App() {
 
@@ -14,22 +15,40 @@ function App() {
     { "id": 10, "title": "Note di Changelog" }
   ]
 
+  const [articles, setArticles] = useState(titleArticles)
+  const [newArticle, setNewArticle] = useState('')
+
+  function handleSubmit(e) {
+    e.preventDefault();
+    const addNewArticle = [...articles, newArticle]
+    setArticles(addNewArticle)
+    setNewArticle('')
+  }
+
   return (
     <>
 
       <main className="container">
         <h1>Write your article</h1>
-        <div>
-          <ul class="list-group">
-            {titleArticles.map(article => (
-              <li
-                className="list-group-item d-flex justify-content-between align-items-center" key={article.id}>
-                {article.title}
-                <span class="badge bg-secondary badge-pill"></span>
-              </li>
-            ))}
+        <div className="col-6 mx-auto">
+          <div className="card p-3">
 
-          </ul>
+            <form onSubmit={handleSubmit}>
+              <input type="text" value={newArticle} onChange={(e) => setNewArticle(e.target.value)} />
+              <button className="badge bg-success my-4 mx-4" type="submit">Add</button>
+            </form>
+
+            <ul className="list-group">
+              {articles.map(article => (
+                <li key={article.id}
+                  className="list-group-item d-flex justify-content-between align-items-center">
+                  {article.title}
+                  <span clasName="badge bg-secondary badge-pill"></span>
+                </li>
+              ))}
+
+            </ul>
+          </div>
 
         </div>
       </main>
