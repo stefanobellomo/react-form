@@ -1,25 +1,26 @@
 import { useState } from "react"
+import Form from "./Form"
 
 export default function Main(props) {
 
     const [articles, setArticles] = useState(props.titleArticles)
-    const [newArticle, setNewArticle] = useState('')
+    // const [newArticle, setNewArticle] = useState('')
 
-    function handleSubmit(e) {
-        e.preventDefault();
+    // function handleSubmit(e) {
+    //     e.preventDefault();
 
-        if (newArticle.length < 4) {
-            setNewArticle('')
-        } else {
-            const article = {
-                id: articles[articles.length - 1].id + 1,
-                title: newArticle,
-            }
-            const addNewArticle = [...articles, article]
-            setArticles(addNewArticle)
-            setNewArticle('')
-        }
-    }
+    //     if (newArticle.length < 4) {
+    //         setNewArticle('')
+    //     } else {
+    //         const article = {
+    //             id: articles[articles.length - 1].id + 1,
+    //             title: newArticle,
+    //         }
+    //         const addNewArticle = [...articles, article]
+    //         setArticles(addNewArticle)
+    //         setNewArticle('')
+    //     }
+    // }
 
     function handleTrash(id) {
         const filteredArticles = articles.filter((article) => article.id !== id)
@@ -34,10 +35,11 @@ export default function Main(props) {
             <div className="col-6 mx-auto">
                 <div className="card p-3">
 
-                    <form onSubmit={handleSubmit}>
+                    <Form articles={articles} setArticles={setArticles} />
+                    {/* <form onSubmit={handleSubmit}>
                         <input type="text" value={newArticle} onChange={(e) => setNewArticle(e.target.value)} />
                         <button className="badge bg-success my-4 mx-4" type="submit">Add</button>
-                    </form>
+                    </form> */}
 
                     <ul className="list-group">
                         {articles.map(article => (
